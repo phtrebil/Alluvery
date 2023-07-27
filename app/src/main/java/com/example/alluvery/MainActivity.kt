@@ -6,12 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.alluvery.ui.theme.AlluveryTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,8 +34,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyFirstComposeble(){
-    Row{
-        Column(Modifier.background(color = Color.White)) {
+    Row(Modifier
+        .padding(16.dp)
+        .fillMaxWidth()){
+        Column(Modifier
+            .padding(8.dp)
+            .background(color = Color.White)
+            .padding(10.dp, 24.dp)) {
             Text(text = "Meu primeiro texto. ")
             Text(text = "Meu segundo texto.")
         }
