@@ -10,11 +10,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,36 +52,39 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable fun PrimeiroProduto(){
-    Column(
-        Modifier
-            .height(250.dp)
-            .width(200.dp)
-    ) {
-        Box(modifier = Modifier
-            .height(100.dp)
-            .fillMaxWidth()
-            .background(brush = Brush.horizontalGradient(colors = listOf(Purple500, Teal)))){
-            Image(painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = "fundo verde quadriculado",
-                Modifier
-                    .size(100.dp)
-                    .offset(y = 50.dp)
-                    .clip(shape = CircleShape)
-                    .align(BottomCenter)
-            )
+    Surface(shape = RoundedCornerShape(15.dp), shadowElevation = 8.dp){
+        Column(
+            Modifier
+                .heightIn(250.dp, 300.dp)
+                .width(200.dp)
+        ) {
+            val imageSize = 100.dp
+            Box(modifier = Modifier
+                .height(imageSize)
+                .fillMaxWidth()
+                .background(brush = Brush.horizontalGradient(colors = listOf(Purple500, Teal)))){
+                Image(painter = painterResource(id = R.drawable.ic_launcher_background),
+                    contentDescription = "fundo verde quadriculado",
+                    Modifier
+                        .size(imageSize)
+                        .offset(y = imageSize/2)
+                        .clip(shape = CircleShape)
+                        .align(BottomCenter)
+                )
+            }
+            Spacer(Modifier.height(imageSize/2))
+
+            Column(Modifier.padding(16.dp)) {
+                Text(text = LoremIpsum(500).values.first(),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight(700),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                Text(text = "R$14,99", Modifier.padding(top = 8.dp) ,  fontSize = 14.sp, fontWeight = FontWeight(400))
+            }
+
         }
-        Spacer(Modifier.height(50.dp))
-
-        Column(Modifier.padding(16.dp)) {
-            Text(text = LoremIpsum(500).values.first(),
-                fontSize = 18.sp,
-                fontWeight = FontWeight(700),
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-
-            Text(text = "R$14.99", Modifier.padding(top = 8.dp) ,  fontSize = 14.sp, fontWeight = FontWeight(400))
-        }
-
     }
 }
