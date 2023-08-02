@@ -5,8 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +18,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
@@ -41,7 +45,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AlluveryTheme{
                 Surface{
-
+                    ListaDeProdutos()
                 }
                 
             }
@@ -50,7 +54,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true)
 @Composable fun PrimeiroProduto(){
     Surface(shape = RoundedCornerShape(15.dp), shadowElevation = 8.dp){
         Column(
@@ -67,7 +70,7 @@ class MainActivity : ComponentActivity() {
                     contentDescription = "fundo verde quadriculado",
                     Modifier
                         .size(imageSize)
-                        .offset(y = imageSize/2)
+                        .offset(y = imageSize / 2)
                         .clip(shape = CircleShape)
                         .align(BottomCenter)
                 )
@@ -87,4 +90,30 @@ class MainActivity : ComponentActivity() {
 
         }
     }
+}
+
+@Composable fun ListaDeProdutos(){
+    Column() {
+        Text(text = "Promoção",
+            Modifier.padding(top = 16.dp, start = 16.dp),
+            fontSize = 20.sp,
+            fontWeight = FontWeight(400))
+
+        Row(
+            Modifier
+                .padding(top = 8.dp, bottom = 16.dp)
+                .fillMaxWidth()
+                .horizontalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            PrimeiroProduto()
+            PrimeiroProduto()
+            PrimeiroProduto()
+        }
+    }
+}
+
+@Preview(showSystemUi = true)
+@Composable fun ProductItemPreview(){
+    ListaDeProdutos()
 }
