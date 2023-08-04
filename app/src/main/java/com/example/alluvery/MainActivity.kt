@@ -31,16 +31,19 @@ import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.alluvery.extensions.toBrazilianCurrency
+import com.example.alluvery.model.Product
 import com.example.alluvery.ui.theme.AlluveryTheme
 import com.example.alluvery.ui.theme.Purple500
 import com.example.alluvery.ui.theme.Teal
+import java.math.BigDecimal
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +61,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PrimeiroProduto(description: String = "") {
+fun PrimeiroProduto(product: Product) {
     Surface(shape = RoundedCornerShape(15.dp), shadowElevation = 8.dp) {
         Column(
             Modifier
@@ -74,35 +77,38 @@ fun PrimeiroProduto(description: String = "") {
                     .background(brush = Brush.horizontalGradient(colors = listOf(Purple500, Teal)))
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    painter = painterResource(id = product.imagem),
                     contentDescription = "fundo verde quadriculado",
                     Modifier
                         .size(imageSize)
                         .offset(y = imageSize / 2)
                         .clip(shape = CircleShape)
                         .align(BottomCenter)
-                        .border(2.dp, Brush.verticalGradient(listOf(Teal, Purple500)), CircleShape)
+                        .border(2.dp, Brush.verticalGradient(listOf(Teal, Purple500)), CircleShape),
+                    contentScale = ContentScale.Crop
+
                 )
             }
             Spacer(Modifier.height(imageSize / 2))
             Column(Modifier.padding(16.dp)) {
                 Text(
-                    text = LoremIpsum(50).values.first(),
+                    text = product.nome,
+                    Modifier.padding(start = 8.dp),
                     fontSize = 18.sp,
                     fontWeight = FontWeight(700),
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "R$ 14,99",
-                    Modifier.padding(top = 8.dp),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight(400)
+                    text = product.preco.toBrazilianCurrency(),
+                    Modifier.padding(8.dp, top = 12.dp, bottom = 19.dp),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight(500)
                 )
             }
-            if (description.isNotBlank()) {
+            if (product.descricao.isNotBlank()) {
                 Text(
-                    text = description,
+                    text = product.descricao,
                     Modifier
                         .background(
                             brush = Brush.horizontalGradient(
@@ -143,9 +149,30 @@ fun ListaDeProdutos() {
                 .padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            PrimeiroProduto("Hot dog legal daora uhAiuHaiuhaiuHaiuhioudhasifuhmafuihmseiofuhwefuihesfuhwe fweopsf grgwergregj ergijergioe ")
-            PrimeiroProduto(LoremIpsum(20).values.first())
-            PrimeiroProduto(LoremIpsum(50).values.first())
+            PrimeiroProduto(
+                Product(
+                    nome= "Hamburguer",
+                    preco= BigDecimal(25.90),
+                    imagem = R.drawable.burger,
+                    descricao = "Um suculento hambúrguer de fraldinha de 150g, acompanhado de bacon crocante, queijo derretido e uma refrescante salada. A combinação perfeita de sabor e textura em um único hambúrguer!"
+                )
+            )
+            PrimeiroProduto(
+                Product(
+                    "Batata-frita",
+                    BigDecimal(9.90),
+                    R.drawable.fries,
+                    "Irresistivelmente crocante por fora, macia por dentro. Nossas batatas fritas são um prazer sensorial em cada mordida. Experimente o equilíbrio perfeito de sabor e textura neste delicioso petisco! "
+                )
+            )
+            PrimeiroProduto(
+                Product(
+                    "Pizza Napolitana",
+                    BigDecimal(34.90),
+                    R.drawable.pizza,
+                    "Autêntica e apaixonante! Massa leve, macia e aerada, combinada com molho de tomate fresco e cremosa muçarela. Toques finais de manjericão e azeite de oliva. Uma experiência única da tradição italiana em cada mordida. Buon appetito!"
+                )
+            )
         }
     }
 }
