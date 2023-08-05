@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -51,12 +52,27 @@ class MainActivity : ComponentActivity() {
         setContent {
             AlluveryTheme {
                 Surface {
-                    ListaDeProdutos()
+                    App()
                 }
 
             }
 
         }
+    }
+}
+
+@Composable
+fun App() {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        ListaDeProdutos()
+        ListaDeProdutos()
+        ListaDeProdutos()
     }
 }
 
@@ -136,14 +152,13 @@ fun ListaDeProdutos() {
     Column() {
         Text(
             text = "Promoção",
-            Modifier.padding(top = 16.dp, start = 16.dp),
+            Modifier.padding(start = 16.dp),
             fontSize = 20.sp,
             fontWeight = FontWeight(400)
         )
 
         Row(
             Modifier
-                .padding(top = 8.dp, bottom = 16.dp)
                 .fillMaxWidth()
                 .horizontalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp),
@@ -151,8 +166,8 @@ fun ListaDeProdutos() {
         ) {
             PrimeiroProduto(
                 Product(
-                    nome= "Hamburguer",
-                    preco= BigDecimal(25.90),
+                    nome = "Hamburguer",
+                    preco = BigDecimal(25.90),
                     imagem = R.drawable.burger,
                     descricao = "Um suculento hambúrguer de fraldinha de 150g, acompanhado de bacon crocante, queijo derretido e uma refrescante salada. A combinação perfeita de sabor e textura em um único hambúrguer!"
                 )
@@ -180,5 +195,5 @@ fun ListaDeProdutos() {
 @Preview(showSystemUi = true)
 @Composable
 fun ProductItemPreview() {
-    ListaDeProdutos()
+    App()
 }
