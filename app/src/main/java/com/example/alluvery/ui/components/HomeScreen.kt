@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.alluvery.sampledata.sampleProduct
 
 @Composable
 fun HomeScreen() {
@@ -20,9 +21,9 @@ fun HomeScreen() {
             .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        ListaDeProdutos()
-        ListaDeProdutos()
-        ListaDeProdutos()
+        ListaDeProdutos("Promoções", sampleProduct)
+        ListaDeProdutos("Doces", sampleProduct)
+        ListaDeProdutos("Bebidas", sampleProduct)
     }
 }
 
