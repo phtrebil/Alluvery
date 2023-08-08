@@ -55,17 +55,20 @@ fun PrimeiroProduto(product: Product) {
                 modifier = Modifier
                     .height(imageSize)
                     .fillMaxWidth()
-                    .background(brush = Brush.horizontalGradient(colors = listOf(Purple500, Teal)))
+                    .background(brush = Brush.horizontalGradient(colors = listOf(
+                        MaterialTheme.colorScheme.primary,
+                        MaterialTheme.colorScheme.secondary)))
             ) {
-                Image(
-                    painter = painterResource(id = product.imagem),
+                Image(// TODO: ajustar imagem do produto
+                    painter = painterResource(id = R.drawable.ic_launcher_background),
                     contentDescription = "fundo verde quadriculado",
                     Modifier
                         .size(imageSize)
                         .offset(y = imageSize / 2)
                         .clip(shape = CircleShape)
                         .align(Alignment.BottomCenter)
-                        .border(2.dp, Brush.verticalGradient(listOf(Teal, Purple500)), CircleShape),
+                        .border(2.dp, Brush.verticalGradient(listOf(MaterialTheme.colorScheme.primary,
+                            MaterialTheme.colorScheme.secondary)), CircleShape),
                     contentScale = ContentScale.Crop
 
                 )
@@ -94,8 +97,8 @@ fun PrimeiroProduto(product: Product) {
                         .background(
                             brush = Brush.horizontalGradient(
                                 colors = listOf(
-                                    Purple500,
-                                    Teal
+                                    MaterialTheme.colorScheme.primary,
+                                    MaterialTheme.colorScheme.secondary
                                 )
                             )
                         )
@@ -112,13 +115,14 @@ fun PrimeiroProduto(product: Product) {
     }
 }
 
-@Preview(showSystemUi = true)
+@Preview
 @Composable
-fun MostraDisplay(){
-    PrimeiroProduto(product = Product(
-        nome = LoremIpsum(10).values.first(),
-        preco = BigDecimal(10.90),
-        imagem = R.drawable.burger,
-        descricao = ""
-    ))
+fun MostraProduto(){
+    PrimeiroProduto(
+        Product(
+            LoremIpsum(50).values.first(),
+            BigDecimal("14.99")
+        )
+    )
 }
+

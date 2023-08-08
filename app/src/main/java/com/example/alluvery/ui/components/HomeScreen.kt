@@ -8,12 +8,13 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.alluvery.sampledata.sampleProduct
+import com.example.alluvery.model.Product
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    sections: Map<String, List<Product>>
+) {
     Column(
         Modifier
             .fillMaxSize()
@@ -21,14 +22,13 @@ fun HomeScreen() {
             .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        ListaDeProdutos("Promoções", sampleProduct)
-        ListaDeProdutos("Doces", sampleProduct)
-        ListaDeProdutos("Bebidas", sampleProduct)
+        for (section in sections) {
+            val title = section.key
+            val products = section.value
+            ListaDeProdutos(
+                title,
+                products
+            )
+        }
     }
-}
-
-@Preview
-@Composable
-fun ShowHomeScreen(){
-    HomeScreen()
 }

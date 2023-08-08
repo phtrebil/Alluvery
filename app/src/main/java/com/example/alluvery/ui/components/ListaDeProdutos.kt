@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.alluvery.model.Product
-import com.example.alluvery.sampledata.sampleProduct
+import com.example.alluvery.sampledata.sampleProducts
 
 @Composable
 fun ListaDeProdutos(titulo: String, products: List<Product>) {
@@ -44,6 +44,6 @@ fun ListaDeProdutos(titulo: String, products: List<Product>) {
 @Preview(showSystemUi = true)
 @Composable
 fun MostraDisplayListaDeProdutos() {
-    ListaDeProdutos("Promoções", sampleProduct)
+    ListaDeProdutos("Promoções", products = sampleProducts)
 }
 
