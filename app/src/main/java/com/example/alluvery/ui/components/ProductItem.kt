@@ -1,6 +1,5 @@
 package com.example.alluvery.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -26,18 +25,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.alluvery.R
+import coil.compose.AsyncImage
 import com.example.alluvery.extensions.toBrazilianCurrency
 import com.example.alluvery.model.Product
-import com.example.alluvery.ui.theme.Purple500
-import com.example.alluvery.ui.theme.Teal
 import java.math.BigDecimal
 
 
@@ -59,9 +55,9 @@ fun PrimeiroProduto(product: Product) {
                         MaterialTheme.colorScheme.primary,
                         MaterialTheme.colorScheme.secondary)))
             ) {
-                Image(// TODO: ajustar imagem do produto
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
-                    contentDescription = "fundo verde quadriculado",
+                AsyncImage(
+                    model = product.imagem,
+                    contentDescription = "imagem do produto",
                     Modifier
                         .size(imageSize)
                         .offset(y = imageSize / 2)
