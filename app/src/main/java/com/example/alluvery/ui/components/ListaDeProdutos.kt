@@ -2,9 +2,11 @@ package com.example.alluvery.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,7 +22,7 @@ fun ListaDeProdutos(titulo: String, products: List<Product>) {
     Column(Modifier.padding(bottom = 8.dp)) {
         Text(
             text = titulo,
-            Modifier.padding(start = 16.dp, top = 8.dp, bottom = 8.dp),
+            Modifier.padding(start = 16.dp),
             fontSize = 20.sp,
             fontWeight = FontWeight(400)
         )
@@ -28,17 +30,17 @@ fun ListaDeProdutos(titulo: String, products: List<Product>) {
         LazyRow(
             Modifier
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
-            for (p in products) {
-                item {
-                    PrimeiroProduto(product = p)
-                }
-
+            items(products) { p ->
+                PrimeiroProduto(product = p)
             }
+
         }
     }
 }
+
 
 @Preview(showSystemUi = true)
 @Composable
