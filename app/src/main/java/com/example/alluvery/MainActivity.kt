@@ -25,8 +25,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview
-@Composable
-fun ShowUi(){
-    HomeScreen(sampleSections)
-}
