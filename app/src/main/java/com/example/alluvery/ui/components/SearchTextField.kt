@@ -3,8 +3,12 @@ package com.example.alluvery.ui.components
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,6 +31,16 @@ fun SearchBar(){
         Modifier
             .padding(start = 16.dp, top = 16.dp, end = 16.dp)
             .fillMaxWidth(),
-        shape = RoundedCornerShape(25)
+        shape = RoundedCornerShape(25),
+        leadingIcon = {
+            Icon(Icons.Default.Search, contentDescription = "icone de busca")
+        },
+        label = {
+            Text(text = "Produto")
+        },
+        placeholder = {
+            Text("O que você procura?")
+        }
+
     )
 }
