@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 @Preview(showBackground = true)
 @Composable
 fun SearchBar(){
-    var text by remember{ mutableStateOf("O que deseja pesquisar?")}
+    var text by remember{ mutableStateOf("")}
     OutlinedTextField(
         value = text,
         onValueChange = { newValue ->
