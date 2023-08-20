@@ -38,10 +38,13 @@ import java.math.BigDecimal
 
 
 @Composable
-fun PrimeiroProduto(product: Product) {
+fun PrimeiroProduto(
+    product: Product,
+    modifier: Modifier = Modifier
+) {
     Surface(shape = RoundedCornerShape(15.dp), shadowElevation = 8.dp) {
         Column(
-            Modifier
+            modifier
                 .heightIn(250.dp, 260.dp)
                 .width(200.dp)
                 .verticalScroll(rememberScrollState())

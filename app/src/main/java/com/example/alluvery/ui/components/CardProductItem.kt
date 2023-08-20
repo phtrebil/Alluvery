@@ -1,6 +1,5 @@
 package com.example.alluvery.ui.components
 
-import android.content.res.Resources.Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,9 +26,10 @@ import com.example.alluvery.sampledata.sampleProducts
 @Composable
 fun CardProductItem(
     product: Product,
+    modifier: Modifier = Modifier
 ) {
     Card(
-        Modifier
+        modifier
             .fillMaxWidth()
             .heightIn(150.dp)
     ) {

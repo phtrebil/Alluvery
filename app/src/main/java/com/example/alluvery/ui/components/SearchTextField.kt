@@ -29,7 +29,7 @@ fun SearchBar(){
             text = newValue
         },
         Modifier
-            .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+            .padding(16.dp)
             .fillMaxWidth(),
         shape = RoundedCornerShape(25),
         leadingIcon = {

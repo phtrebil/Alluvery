@@ -18,8 +18,8 @@ import com.example.alluvery.model.Product
 import com.example.alluvery.sampledata.sampleProducts
 
 @Composable
-fun ListaDeProdutos(titulo: String, products: List<Product>) {
-    Column(Modifier.padding(bottom = 8.dp)) {
+fun ListaDeProdutos(titulo: String, products: List<Product>, modifier: Modifier = Modifier) {
+    Column(modifier.padding(bottom = 8.dp)) {
         Text(
             text = titulo,
             Modifier.padding(start = 16.dp),
