@@ -6,19 +6,22 @@ import java.math.BigDecimal
 
 val sampleCandies = listOf(
     Product(
-        "Chocolate",
-         BigDecimal("3.99"),
-        "https://images.pexels.com/photos/65882/chocolate-dark-coffee-confiserie-65882.jpeg",
+        nome="Chocolate",
+        preco = BigDecimal("3.99"),
+        imagem="https://images.pexels.com/photos/65882/chocolate-dark-coffee-confiserie-65882.jpeg",
+        descricao = "Delícioso chocolate Belga. Barra de 100g."
     ),
     Product(
         "Sorvete",
         BigDecimal("5.99"),
         "https://images.pexels.com/photos/1352278/pexels-photo-1352278.jpeg",
+        "Sorvete de flocos Kibon"
     ),
     Product(
         "Bolo",
         BigDecimal("11.99"),
         "https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg",
+        "Bolo de cenoura Piteu"
     )
 )
 

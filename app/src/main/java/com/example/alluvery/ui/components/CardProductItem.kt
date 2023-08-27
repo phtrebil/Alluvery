@@ -15,12 +15,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.alluvery.R
 import com.example.alluvery.extensions.toBrazilianCurrency
 import com.example.alluvery.model.Product
 import com.example.alluvery.sampledata.sampleProducts
+import java.math.BigDecimal
 
 
 @Composable
@@ -59,12 +61,13 @@ fun CardProductItem(
                     color = Color.White
                 )
             }
-            // TODO: adicionar descrição do produto
-            // Text(
-            //     text = product.description,
-            //     Modifier
-            //         .padding(16.dp)
-            // )
+            if(product.descricao != ""){
+                Text(
+                    text = product.descricao,
+                    Modifier
+                        .padding(16.dp)
+                )
+            }
         }
     }
     
@@ -77,7 +80,11 @@ fun CardProductItem(
 private fun CardProductItemPreview() {
 
     CardProductItem(
-        product = sampleProducts.random(),
+        product = Product(
+            "Bombom",
+            BigDecimal("1,99"),
+            "https://images.pexels.com/photos/65882/chocolate-dark-coffee-confiserie-65882.jpeg",
+            LoremIpsum(50).values.first()),
     )
 
 }
