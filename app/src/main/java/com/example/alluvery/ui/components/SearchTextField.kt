@@ -1,7 +1,11 @@
 package com.example.alluvery.ui.components
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -21,8 +25,8 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
-fun SearchBar(){
-    var text by remember{ mutableStateOf("")}
+fun SearchBar(searchText: String = ""){
+    var text by remember{ mutableStateOf(searchText)}
     OutlinedTextField(
         value = text,
         onValueChange = { newValue ->
@@ -43,4 +47,22 @@ fun SearchBar(){
         }
 
     )
+    LazyColumn(
+            Modifier
+                .fillMaxSize(),
+    verticalArrangement = Arrangement.spacedBy(16.dp),
+    contentPadding = PaddingValues(bottom = 16.dp)
+    ){
+        if(text.isBlank()) {
+            for (section in sections) {
+                val title = section.key
+                val products = section.value
+                item {
+                    ProductsSection(
+                        title = title,
+                        products = products
+                    )
+                }
+            }
+    }
 }
