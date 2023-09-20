@@ -19,26 +19,32 @@ import com.example.alluvery.sampledata.sampleProducts
 
 @Composable
 fun ListaDeProdutos(titulo: String, products: List<Product>, modifier: Modifier = Modifier) {
-    Column(modifier.padding(bottom = 8.dp)) {
-        Text(
-            text = titulo,
-            Modifier.padding(start = 16.dp),
-            fontSize = 20.sp,
-            fontWeight = FontWeight(400)
-        )
-
-        LazyRow(
-            Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp)
-        ) {
-            items(products) { p ->
-                PrimeiroProduto(product = p)
+    Section(
+        title = {
+            Text(
+                text = titulo,
+                Modifier.padding(
+                    start = 16.dp,
+                    end = 16.dp
+                ),
+                fontSize = 20.sp,
+                fontWeight = FontWeight(400)
+            )
+        },
+        content = {
+            LazyRow(
+                Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp)
+            ) {
+                items(products) { p ->
+                    PrimeiroProduto(product = p)
+                }
             }
-
-        }
-    }
+        },
+        modifier = modifier
+    )
 }
 
 
