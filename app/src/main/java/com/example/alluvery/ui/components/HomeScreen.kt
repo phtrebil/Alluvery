@@ -1,7 +1,6 @@
 package br.com.alura.aluvery.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,8 +22,10 @@ import androidx.compose.ui.unit.dp
 import com.example.alluvery.model.Product
 import com.example.alluvery.sampledata.sampleProducts
 import com.example.alluvery.sampledata.sampleSections
+import com.example.alluvery.sampledata.sampleShopSections
 import com.example.alluvery.ui.components.CardProductItem
 import com.example.alluvery.ui.components.ListaDeProdutos
+import com.example.alluvery.ui.components.PartnersSection
 import com.example.alluvery.ui.components.ScaffoldTopBar
 import com.example.alluvery.ui.components.SearchBar
 import com.example.alluvery.ui.theme.AlluveryTheme
@@ -36,7 +37,7 @@ fun HomeScreen(
     sections: Map<String, List<Product>>,
     searchText: String = ""
 ) {
-    Scaffold(topBar = { ScaffoldTopBar()}) {
+    Scaffold(topBar = { ScaffoldTopBar() }) {
 
         Column(Modifier.padding(it)) {
 
@@ -79,6 +80,13 @@ fun HomeScreen(
                         val products = section.value
                         item {
                             ListaDeProdutos(titulo = title, products = products)
+                        }
+                    }
+                    for (shopSections in sampleShopSections) {
+                        val title = shopSections.key
+                        val shop = shopSections.value
+                        item {
+                            PartnersSection(title = title, shop = shop)
                         }
                     }
                 } else {
