@@ -45,6 +45,7 @@ fun HomeScreen(
             var text by remember {
                 mutableStateOf(searchText)
             }
+
             SearchBar(
                 searchText = text,
                 onSearchChange = {
@@ -83,11 +84,14 @@ fun HomeScreen(
                         }
                     }
                     for (shopSections in sampleShopSections) {
+
                         val title = shopSections.key
                         val shop = shopSections.value
                         item {
                             PartnersSection(title = title, shop = shop)
                         }
+
+
                     }
                 } else {
                     items(searchedProducts) { p ->

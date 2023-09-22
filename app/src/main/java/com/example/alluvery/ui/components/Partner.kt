@@ -1,5 +1,6 @@
 package com.example.alluvery.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -25,6 +26,7 @@ import com.example.alluvery.model.Shop
 @Composable
 fun Partner(
     shop: Shop,
+    onItemClick: (Shop) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
@@ -33,7 +35,7 @@ fun Partner(
         Column(
             Modifier
                 .heightIn(150.dp, 200.dp)
-                .width(100.dp)
+                .width(100.dp).clickable { onItemClick(shop) }
         ) {
             val imageSize = 100.dp
             AsyncImage(
