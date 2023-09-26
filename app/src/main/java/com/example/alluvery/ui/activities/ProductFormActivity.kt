@@ -1,6 +1,7 @@
 package com.example.alluvery.ui.activities
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -23,15 +24,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.alluvery.model.Product
 import com.example.alluvery.ui.theme.AlluveryTheme
+import java.math.BigDecimal
 
 class ProductFormActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AlluveryTheme() {
-                Text(text = "Formulário de produto")
+            AlluveryTheme {
+                ProductFormScreen()
             }
         }
     }
@@ -77,10 +80,28 @@ fun ProductFormScreen() {
 
         TextField(value = description, onValueChange = {
             description = it
-        }, Modifier.fillMaxWidth().heightIn(100.dp), label = { Text(text = "Descrição") })
+        },
+            Modifier
+                .fillMaxWidth()
+                .heightIn(100.dp), label = { Text(text = "Descrição") })
 
 
-        Button(onClick = { /*TODO*/ }, Modifier.fillMaxWidth()) {
+        Button(onClick = {
+            val preco = try{
+                BigDecimal(price)
+            }catch (e:NumberFormatException){
+                BigDecimal.ZERO
+            }
+
+            val product = Product(
+                nome = name,
+                imagem = url,
+                preco = preco,
+                descricao = description
+            )
+            Log.i("ProductForm", "ProductFormMessage: $product")
+
+        }, Modifier.fillMaxWidth()) {
             Text(text = "Salvar")
         }
     }
