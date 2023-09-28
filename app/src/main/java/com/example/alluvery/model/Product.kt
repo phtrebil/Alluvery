@@ -1,6 +1,5 @@
 package com.example.alluvery.model
 
-import androidx.annotation.DrawableRes
 import java.math.BigDecimal
 
 data class Product(
