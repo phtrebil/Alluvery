@@ -34,20 +34,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.alluvery.R
+import com.example.alluvery.dao.ProductDao
 import com.example.alluvery.model.Product
 import com.example.alluvery.ui.theme.AlluveryTheme
-import java.lang.IllegalArgumentException
 import java.math.BigDecimal
-import java.math.RoundingMode
 import java.text.DecimalFormat
 
 class ProductFormActivity : ComponentActivity() {
+
+    private val dao = ProductDao()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             AlluveryTheme {
-                ProductFormScreen()
+                ProductFormScreen(onButtonClick = {
+                    product ->  dao.save(product)
+                    finish()
+                })
             }
         }
     }
@@ -55,7 +59,7 @@ class ProductFormActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductFormScreen() {
+fun ProductFormScreen(onButtonClick:(product:Product) -> Unit ={}){
     Column(
         Modifier
             .padding(16.dp)
@@ -175,6 +179,7 @@ fun ProductFormScreen() {
                     descricao = description
                 )
                 Log.i("ProductForm", "ProductFormMessage: $product")
+                onButtonClick(product)
 
             }, Modifier.fillMaxWidth()
         ) {
