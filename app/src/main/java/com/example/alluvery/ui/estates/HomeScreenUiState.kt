@@ -1,0 +1,32 @@
+package com.example.alluvery.ui.estates
+
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import com.example.alluvery.sampledata.sampleProducts
+
+class HomeScreenUiState(searchText: String = "") {
+
+    var text by mutableStateOf(searchText)
+
+
+    val searchedProducts
+        get() =
+            if (text.isNotBlank()) {
+                sampleProducts.filter { product ->
+                    product.nome.contains(
+                        text,
+                        ignoreCase = true,
+                    ) ||
+                            product.descricao?.contains(
+                                text,
+                                ignoreCase = true,
+                            ) ?: false
+                }
+            } else emptyList()
+
+    fun isShowSections():Boolean{
+        return text.isBlank()
+    }
+
+}
