@@ -14,11 +14,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import br.com.alura.aluvery.ui.screens.HomeScreen
 import com.example.alluvery.dao.ProductDao
 import com.example.alluvery.sampledata.sampleCandies
 import com.example.alluvery.sampledata.sampleDrinks
+import com.example.alluvery.ui.estates.HomeScreenUiState
 import com.example.alluvery.ui.theme.AlluveryTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,6 +33,9 @@ class MainActivity : ComponentActivity() {
             App(onFabClick = {
                 startActivity(Intent(this, ProductFormActivity::class.java))
             }){
+                val state = remember {
+                    HomeScreenUiState()
+                }
                 val sections = mapOf(
                     "Todos os produtos" to dao.products(),
                     "Promoções" to sampleDrinks + sampleCandies,
@@ -38,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     "Bebidas" to sampleDrinks
                     
                 )
-                HomeScreen(sections = sections)
+                HomeScreen(sections = sections, state = state)
             }
 
         }

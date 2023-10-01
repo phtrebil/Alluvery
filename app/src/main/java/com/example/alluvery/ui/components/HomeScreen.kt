@@ -32,15 +32,12 @@ import com.example.alluvery.ui.theme.AlluveryTheme
 @Composable
 fun HomeScreen(
     sections: Map<String, List<Product>>,
-    searchText: String = ""
+    state: HomeScreenUiState = HomeScreenUiState()
 ) {
     Scaffold(topBar = { ScaffoldTopBar() }) {
 
         Column(Modifier.padding(it)) {
 
-            val state = remember {
-                HomeScreenUiState(searchText)
-            }
             val text = state.text
 
             val searchedProducts = remember(text) {
@@ -50,9 +47,7 @@ fun HomeScreen(
 
             SearchBar(
                 searchText = text,
-                onSearchChange = {
-                    state.text = it
-                },
+                onSearchChange = state.onSearchChange,
                 Modifier
                     .padding(8.dp)
                     .fillMaxWidth(),
@@ -114,7 +109,7 @@ fun HomeScreenWithSearchTextPreview() {
         Surface {
             HomeScreen(
                 sampleSections,
-                searchText = "a"
+                state = HomeScreenUiState(searchText = "a")
             )
         }
     }

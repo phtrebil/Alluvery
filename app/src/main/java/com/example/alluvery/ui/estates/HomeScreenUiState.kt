@@ -8,6 +8,12 @@ import com.example.alluvery.sampledata.sampleProducts
 class HomeScreenUiState(searchText: String = "") {
 
     var text by mutableStateOf(searchText)
+        private set
+
+    val onSearchChange: (String) -> Unit = {searchedText ->
+        text = searchedText
+
+    }
 
 
     val searchedProducts
