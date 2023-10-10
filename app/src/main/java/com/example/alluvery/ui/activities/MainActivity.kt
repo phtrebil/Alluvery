@@ -33,17 +33,19 @@ class MainActivity : ComponentActivity() {
             App(onFabClick = {
                 startActivity(Intent(this, ProductFormActivity::class.java))
             }){
-                val state = remember {
-                    HomeScreenUiState()
-                }
                 val sections = mapOf(
                     "Todos os produtos" to dao.products(),
                     "Promoções" to sampleDrinks + sampleCandies,
                     "Doces" to sampleCandies,
                     "Bebidas" to sampleDrinks
-                    
+
                 )
-                HomeScreen(sections = sections, state = state)
+
+                val state = remember(sections) {
+                    HomeScreenUiState(sections = sections)
+                }
+
+                HomeScreen(state = state)
             }
 
         }

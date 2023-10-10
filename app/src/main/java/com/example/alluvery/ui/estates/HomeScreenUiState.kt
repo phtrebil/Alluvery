@@ -3,9 +3,13 @@ package com.example.alluvery.ui.estates
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.example.alluvery.model.Product
 import com.example.alluvery.sampledata.sampleProducts
 
-class HomeScreenUiState(searchText: String = "") {
+class HomeScreenUiState(
+    val sections: Map<String, List<Product>> = emptyMap(),
+    searchText: String = ""
+) {
 
     var text by mutableStateOf(searchText)
         private set

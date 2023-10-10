@@ -31,12 +31,12 @@ import com.example.alluvery.ui.theme.AlluveryTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    sections: Map<String, List<Product>>,
     state: HomeScreenUiState = HomeScreenUiState()
 ) {
     Scaffold(topBar = { ScaffoldTopBar() }) {
 
         Column(Modifier.padding(it)) {
+            val sections = state.sections
 
             val text = state.text
 
@@ -97,7 +97,7 @@ fun HomeScreen(
 private fun HomeScreenPreview() {
     AlluveryTheme {
         Surface {
-            HomeScreen(sampleSections)
+            HomeScreen(state = HomeScreenUiState(sections = sampleSections))
         }
     }
 }
@@ -108,8 +108,7 @@ fun HomeScreenWithSearchTextPreview() {
     AlluveryTheme {
         Surface {
             HomeScreen(
-                sampleSections,
-                state = HomeScreenUiState(searchText = "a")
+                state = HomeScreenUiState(searchText = "a", sections = sampleSections),
             )
         }
     }
