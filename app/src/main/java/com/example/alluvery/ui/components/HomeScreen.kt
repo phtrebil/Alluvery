@@ -38,11 +38,8 @@ fun HomeScreen(
         Column(Modifier.padding(it)) {
             val sections = state.sections
 
-            val text = state.text
-
-            val searchedProducts = remember(text) {
-                state.searchedProducts
-            }
+            val text = state.searchText
+            val searchedProducts = state.searchedProducts
 
 
             SearchBar(
