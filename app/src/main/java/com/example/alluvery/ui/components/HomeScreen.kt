@@ -1,4 +1,4 @@
-package br.com.alura.aluvery.ui.screens
+package com.example.alluvery.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,18 +12,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.alluvery.model.Product
 import com.example.alluvery.sampledata.sampleSections
 import com.example.alluvery.sampledata.sampleShopSections
-import com.example.alluvery.ui.components.CardProductItem
-import com.example.alluvery.ui.components.ListaDeProdutos
-import com.example.alluvery.ui.components.PartnersSection
-import com.example.alluvery.ui.components.ScaffoldTopBar
-import com.example.alluvery.ui.components.SearchBar
 import com.example.alluvery.ui.estates.HomeScreenUiState
 import com.example.alluvery.ui.theme.AlluveryTheme
 
