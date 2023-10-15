@@ -64,7 +64,7 @@ class HomeScreenUiState(
                 }
             )
         }
-        com.example.alluvery.ui.components.HomeScreen(state)
+        com.example.alluvery.ui.screens.HomeScreen(state)
     }
 
 
