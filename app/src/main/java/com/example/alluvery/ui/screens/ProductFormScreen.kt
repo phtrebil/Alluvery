@@ -35,7 +35,9 @@ import java.text.DecimalFormat
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductFormScreen(onButtonClick:(product: Product) -> Unit ={}){
+fun ProductFormScreen(
+    onButtonClick:(product: Product) -> Unit ={}
+){
     Column(
         Modifier
             .padding(16.dp)
