@@ -30,14 +30,36 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.alluvery.R
 import com.example.alluvery.model.Product
+import com.example.alluvery.ui.estates.ProductFormScreenUiState
 import java.math.BigDecimal
 import java.text.DecimalFormat
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductFormScreen(
-    onButtonClick:(product: Product) -> Unit ={}
+    onButtonClick:(Product) -> Unit ={}
 ){
+    var url by remember {
+        mutableStateOf("")
+    }
+
+    var name by remember {
+        mutableStateOf("")
+    }
+
+    var price by remember {
+        mutableStateOf("")
+    }
+
+    var isPriceError by remember {
+        mutableStateOf(false)
+    }
+
+    var description by remember {
+        mutableStateOf("")
+    }
+
+
     Column(
         Modifier
             .padding(16.dp)
@@ -47,10 +69,6 @@ fun ProductFormScreen(
         Text(text = "Criando o produto", Modifier.fillMaxWidth(), fontSize = 28.sp)
 
         //campo imagem
-
-        var url by remember {
-            mutableStateOf("")
-        }
 
         if (url.isNotBlank()) {
             AsyncImage(
@@ -73,10 +91,6 @@ fun ProductFormScreen(
 
         //campo do nome
 
-        var name by remember {
-            mutableStateOf("")
-        }
-
         TextField(value = name, onValueChange = {
             name = it
         }, Modifier.fillMaxWidth(), label = { Text(text = "Nome") },
@@ -85,13 +99,7 @@ fun ProductFormScreen(
 
         //campo do preço
 
-        var price by remember {
-            mutableStateOf("")
-        }
 
-        var isPriceError by remember {
-            mutableStateOf(false)
-        }
         Column {
             TextField(
                 value = price,
@@ -126,9 +134,6 @@ fun ProductFormScreen(
 
         //campo da descrição
 
-        var description by remember {
-            mutableStateOf("")
-        }
 
         TextField(value = description, onValueChange = {
             description = it
@@ -164,4 +169,131 @@ fun ProductFormScreen(
             Text(text = "Salvar")
         }
     }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun ProductFormScreen(
+        state: ProductFormScreenUiState = ProductFormScreenUiState(),
+        onButtonClick:(Product) -> Unit ={}
+    ){
+        var url = state.url
+
+        var name = state.name
+
+        var price = state.price
+
+        var isPriceError by remember {
+            mutableStateOf(false)
+        }
+
+        var description = state.description
+
+
+        Column(
+            Modifier
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Text(text = "Criando o produto", Modifier.fillMaxWidth(), fontSize = 28.sp)
+
+            //campo imagem
+
+            if (state.isShowPreview) {
+                AsyncImage(
+                    model = url, contentDescription = null,
+                    Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
+                    placeholder = painterResource(id = R.drawable.ic_launcher_background),
+                    error = painterResource(id = R.drawable.ic_launcher_background)
+                )
+
+
+            }
+
+            TextField(value = url, onValueChange = state.onUrlChange, Modifier.fillMaxWidth(), label = { Text(text = "Url da Imagem") },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
+            )
+
+            //campo do nome
+
+            TextField(value = name, onValueChange = {
+                name = it
+            }, Modifier.fillMaxWidth(), label = { Text(text = "Nome") },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next, capitalization = KeyboardCapitalization.Words)
+            )
+
+            //campo do preço
+
+
+            Column {
+                TextField(
+                    value = price,
+                    onValueChange = {
+                        isPriceError = try {
+                            price = DecimalFormat("#.00").format(BigDecimal(it))
+                            false
+                        } catch (e: IllegalArgumentException) {
+                            it.isNotEmpty()
+                        }
+                    },
+                    Modifier.fillMaxWidth(),
+                    isError = isPriceError,
+                    label = {
+                        Text(text = "Preço")
+                    },
+                    keyboardOptions =
+                    KeyboardOptions(
+                        keyboardType = KeyboardType.Decimal,
+                        imeAction = ImeAction.Next,
+                    ),
+                )
+                if (isPriceError) {
+                    Text(
+                        text = "Preço deve ser um número decimal",
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
+            }
+
+            //campo da descrição
+
+
+            TextField(value = description, onValueChange = {
+                description = it
+            },
+                Modifier
+                    .fillMaxWidth()
+                    .heightIn(100.dp),
+                label = { Text(text = "Descrição") },
+                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
+            )
+
+            //botão
+
+            Button(
+                onClick = {
+                    val preco = try {
+                        BigDecimal(price)
+                    } catch (e: NumberFormatException) {
+                        BigDecimal.ZERO
+                    }
+
+                    val product = Product(
+                        nome = name,
+                        imagem = url,
+                        preco = preco,
+                        descricao = description
+                    )
+                    Log.i("ProductForm", "ProductFormMessage: $product")
+                    onButtonClick(product)
+
+                }, Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Salvar")
+            }
+        }
 }
